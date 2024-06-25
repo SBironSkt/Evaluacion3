@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Restaurante Firgolini</title>
+    <link rel="stylesheet" href="estilo/estilo.css"> 
+</head>
+<body>
+    <header>
+        <h1>Iniciar Sesión</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="listadatos.html" id="sesion-link">Iniciar Sesión</a></li> <!-- Botón para iniciar sesión -->
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="login-form">
+            <h2>Ingresa tus credenciales</h2>
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="usuario" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+" title="El nombre de usuario no debe contener números ni caracteres especiales.">
+            <!-- Expresión regular para que el nombre de usuario no contenga números y solo acepte letras y espacios -->
+
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" name="contrasena" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="La contraseña debe contener al menos una letra y un número, y tener al menos 8 caracteres de longitud.">
+            <!-- Expresión regular para que la contraseña contenga al menos una letra y un número, y tenga al menos 8 caracteres -->
+
+            <button onclick="validarCredenciales()">Iniciar Sesión</button>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Firgolini Restaurante. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function validarCredenciales() {
+            var usuario = document.getElementById("usuario").value;
+            var contrasena = document.getElementById("contrasena").value;
+
+            // Verificar las credenciales del usuario
+            if (usuario === "Admin" && contrasena === "Info-2024") {
+                window.location.href = 'listadatos.html';
+            } else {
+                alert("Credenciales incorrectas. Por favor, intenta de nuevo.");
+            }
+        }
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante Firgolini</title>
+    <link rel="stylesheet" href="estilo/estilo.css">
+</head>
+<body>
+    <header>
+        <h1>Bienvenidos a Firgolini</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="sesion.html">Iniciar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="quienes-somos">
+            <h2>¿Quiénes somos?</h2>
+            <p>Firgolini es un restaurante dedicado a ofrecer los mejores platillos de la cocina italiana con un toque único y especial. Nuestra pasión es brindarte una experiencia gastronómica inolvidable.</p>
+        </section>
+        
+        <section id="ubicacion">
+            <h2>Ubicación</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d757.0245097148687!2d14.363758513932998!3d40.627719833924495!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133b9ea4ed4dd551%3A0x2b041962953cec0b!2sVia%20Marina%20Grande%2C%20214%2C%2080067%20Sorrento%20NA%2C%20Italia!5e0!3m2!1ses!2scl!4v1716857489063!5m2!1ses!2scl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </section>
+
+        <!-- Formulario de Subida de Foto -->
+        <section id="subida-fotos">
+            <h2>Formulario de Subida de Foto</h2>
+            <form id="uploadForm" action="/subir_imagenes" method="post" enctype="multipart/form-data">
+                <label for="nombre">Nombre de la foto:</label>
+                <input type="text" id="nombre" name="nombre" required><br><br>
+
+                <label for="descripcion">Descripción de la foto:</label>
+                <input type="text" id="descripcion" name="descripcion" required><br><br>
+
+                <label for="imagen">Seleccione la foto:</label>
+                <input type="file" id="imagen" name="imagen" required><br><br>
+
+                <input type="submit" value="Subir Foto">
+            </form>
+
+            <h2>Imágenes Subidas</h2>
+            <div id="imagenesSubidas">
+                <!-- Las imágenes subidas se mostrarán aquí -->
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Firgolini Restaurante. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Función para cargar las imágenes al cargar la página
+        window.onload = function () {
+            fetch('/imagenes')
+            .then(response => response.json())
+            .then(data => {
+                const imagenesDiv = document.getElementById('imagenesSubidas');
+                data.forEach(imagen => {
+                    const imgDiv = document.createElement('div');
+                    imgDiv.innerHTML = 
+                        '<h3>' + imagen.nombre + '</h3>' +
+                        '<p>' + imagen.descripcion + '</p>' +
+                        '<img src="/imagenes/' + imagen.imagen + '" alt="' + imagen.nombre + '" width="200">';
+                    imagenesDiv.appendChild(imgDiv);
+                });
+            });
+        };
+    </script>
+    
+</body>
+</html>
